@@ -31,10 +31,6 @@ class BibliotecaTest {
     void eliminarLibro() {
         biblioteca.agregarLibro(libro2);
         assertTrue(biblioteca.eliminarLibro(libro2), "El libro debería ser eliminado");
-        /*
-        Libro libro2 = new Libro("Apuntes de EEDD", "David", 2025);
-        assertFalse(biblioteca.eliminarLibro(libro2), "Debería no poder eliminar el libro, por que no está agregado a la biblioteca");
-         */
     }
 
     @Test
@@ -54,10 +50,11 @@ class BibliotecaTest {
         assertEquals(libro2, biblioteca.encuentraLibroPorTitulo("Como recuperar un examen"));
     }
 
+    /**
+     * Test 02: buscar libro NO existente y comprobar que no lo localiza.
+     */
     @Test
     void encuentraLibroPorTitulo_NoExistente() {
-        //  Test 02: buscar libro NO existente y comprobar que no lo localiza.
-        // assertEquals(null, biblioteca.encuentraLibroPorTitulo("Cómo aprobar EEDD"), "El libro buscado no tiene el titulo");
         assertNull(biblioteca.encuentraLibroPorTitulo("Este libro no existe"), "El libro buscado no tiene el titulo");
     }
 
@@ -66,6 +63,17 @@ class BibliotecaTest {
     }
 
     @Test
-    void encuentraLibrosPorAutor() {
+    void encuentraLibrosPorAutor_Existente() {
+        biblioteca.agregarLibro(libro1);
+        biblioteca.agregarLibro(libro2);
+
+
+        assertEquals(libro1, biblioteca.encuentraLibrosPorAutor("Luis"));
+
+    }
+
+    @Test
+    void encuentraLibrosPorAutor_NoExistente() {
+        assertNull(biblioteca.encuentraLibrosPorAutor("Drago"), "El libro buscado no tiene el titulo");
     }
 }
